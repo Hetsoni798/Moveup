@@ -1,0 +1,1058 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Moveup — Your Data Manager with full CRUD operations"/>
+  <title>Moveup — Your Data Manager</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet"/>
+
+  <style>
+    /* Reset & Variables */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --bg: #fafbfc;
+      --surface: #ffffff;
+      --surface2: #f8f9fa;
+      --text: #1a1d26;
+      --muted: #6b7280;
+      --border: #e5e7eb;
+      --border2: #d1d5db;
+      --accent: #6366f1;
+      --accent2: #8b5cf6;
+      --danger: #ef4444;
+      --font-head: 'Syne', sans-serif;
+      --font-body: 'DM Sans', sans-serif;
+      --r-sm: 6px;
+      --r-md: 10px;
+      --r-lg: 14px;
+      --r-full: 999px;
+      --sp-sm: 8px;
+      --sp-md: 16px;
+      --sp-lg: 24px;
+      --sp-xl: 32px;
+      --transition: all 0.2s ease;
+      --transition-slow: all 0.3s ease;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    .hidden { display: none !important; }
+    .required { color: var(--danger); }
+
+    /* Auth Screen */
+    .auth-shell {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    }
+
+    .auth-card {
+      background: var(--surface);
+      padding: 40px;
+      border-radius: 16px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+      width: 100%;
+      max-width: 420px;
+    }
+
+    .auth-logo {
+      font-family: var(--font-head);
+      font-size: 32px;
+      font-weight: 800;
+      text-align: center;
+      margin-bottom: 8px;
+    }
+    .auth-logo span { color: var(--accent); }
+
+    .auth-tagline {
+      text-align: center;
+      color: var(--muted);
+      font-size: 14px;
+      margin-bottom: 32px;
+    }
+
+    .auth-title {
+      font-family: var(--font-head);
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 24px;
+    }
+
+    .field {
+      margin-bottom: 18px;
+    }
+
+    .field label {
+      display: block;
+      font-size: 13px;
+      font-weight: 500;
+      margin-bottom: 6px;
+      color: var(--text);
+    }
+
+    .field input, .select-field {
+      width: 100%;
+      padding: 12px 14px;
+      border: 1px solid var(--border);
+      border-radius: var(--r-md);
+      font-family: var(--font-body);
+      font-size: 14px;
+      background: var(--surface);
+      color: var(--text);
+      transition: var(--transition);
+    }
+
+    .field input:focus, .select-field:focus {
+      outline: none;
+      border-color: var(--accent);
+    }
+
+    .textarea-field {
+      width: 100%;
+      padding: 12px 14px;
+      border: 1px solid var(--border);
+      border-radius: var(--r-md);
+      font-family: var(--font-body);
+      font-size: 14px;
+      background: var(--surface);
+      color: var(--text);
+      resize: vertical;
+      min-height: 100px;
+    }
+
+    .textarea-field:focus {
+      outline: none;
+      border-color: var(--accent);
+    }
+
+    .char-count {
+      text-align: right;
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 4px;
+    }
+
+    .btn {
+      padding: 12px 20px;
+      border: none;
+      border-radius: var(--r-md);
+      font-family: var(--font-body);
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: var(--transition);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      justify-content: center;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: white;
+      width: 100%;
+    }
+    .btn-primary:hover {
+      background: #5558e3;
+    }
+
+    .btn-ghost {
+      background: transparent;
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+    .btn-ghost:hover {
+      background: var(--surface2);
+    }
+
+    .btn-danger {
+      background: var(--danger);
+      color: white;
+    }
+    .btn-danger:hover {
+      background: #dc2626;
+    }
+
+    .btn-sm {
+      padding: 8px 14px;
+      font-size: 13px;
+    }
+
+    .auth-switch {
+      text-align: center;
+      margin-top: 20px;
+      font-size: 14px;
+      color: var(--muted);
+    }
+
+    .auth-switch button {
+      background: none;
+      border: none;
+      color: var(--accent);
+      cursor: pointer;
+      font-weight: 500;
+      text-decoration: underline;
+    }
+
+    .error-msg {
+      background: #fee;
+      border: 1px solid #fcc;
+      color: var(--danger);
+      padding: 12px;
+      border-radius: var(--r-md);
+      font-size: 13px;
+      margin-bottom: 16px;
+    }
+
+    /* Topbar */
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 var(--sp-xl);
+      height: 62px;
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .topbar-logo {
+      font-family: var(--font-head);
+      font-size: 22px;
+      font-weight: 800;
+    }
+    .topbar-logo span { color: var(--accent); }
+
+    .topbar-right {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .user-chip {
+      display: flex;
+      align-items: center;
+      gap: var(--sp-sm);
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      padding: 6px 14px 6px 6px;
+      border-radius: var(--r-full);
+      font-size: 13px;
+    }
+
+    .avatar {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    /* Main */
+    .main {
+      max-width: 1040px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 40px var(--sp-xl) 80px;
+    }
+
+    .page-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      margin-bottom: var(--sp-xl);
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .page-title {
+      font-family: var(--font-head);
+      font-size: 28px;
+      font-weight: 800;
+    }
+
+    .page-sub {
+      color: var(--muted);
+      font-size: 14px;
+      margin-top: 4px;
+    }
+
+    /* Stats */
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+      gap: 14px;
+      margin-bottom: var(--sp-xl);
+    }
+
+    .stat-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--r-lg);
+      padding: 20px;
+      transition: var(--transition);
+    }
+
+    .stat-num {
+      font-family: var(--font-head);
+      font-size: 32px;
+      font-weight: 800;
+    }
+
+    .stat-label {
+      font-size: 11px;
+      color: var(--muted);
+      margin-top: 4px;
+      text-transform: uppercase;
+    }
+
+    /* Toolbar */
+    .toolbar {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 22px;
+      flex-wrap: wrap;
+    }
+
+    .search-wrap {
+      position: relative;
+      flex: 1;
+      min-width: 200px;
+    }
+
+    .search-wrap input {
+      width: 100%;
+      padding: 11px 14px 11px 38px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--r-md);
+      font-size: 14px;
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--muted);
+      pointer-events: none;
+    }
+
+    .filter-group {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .filter-btn {
+      padding: 9px 14px;
+      border: 1px solid var(--border);
+      border-radius: var(--r-md);
+      background: var(--surface);
+      color: var(--muted);
+      font-size: 13px;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .filter-btn:hover {
+      background: var(--surface2);
+      color: var(--text);
+    }
+
+    .filter-btn.active {
+      background: var(--surface2);
+      color: var(--text);
+      border-color: var(--accent);
+    }
+
+    /* Items Grid */
+    .items-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+      gap: 16px;
+    }
+
+    .item-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--r-lg);
+      padding: 20px;
+      transition: var(--transition);
+      cursor: pointer;
+    }
+
+    .item-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    }
+
+    .item-category {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: var(--r-full);
+      margin-bottom: 12px;
+      text-transform: uppercase;
+    }
+
+    .cat-work { background: #dbeafe; color: #1e40af; }
+    .cat-personal { background: #ede9fe; color: #6d28d9; }
+    .cat-idea { background: #d1fae5; color: #065f46; }
+    .cat-urgent { background: #fee2e2; color: #991b1b; }
+    .cat-archive { background: #f1f5f9; color: #475569; }
+
+    .item-title {
+      font-family: var(--font-head);
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .item-desc {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.5;
+      margin-bottom: 16px;
+    }
+
+    .item-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 12px;
+      border-top: 1px solid var(--border);
+    }
+
+    .item-date {
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .item-actions {
+      display: flex;
+      gap: 8px;
+    }
+
+    .icon-btn {
+      width: 32px;
+      height: 32px;
+      border: none;
+      background: transparent;
+      cursor: pointer;
+      border-radius: var(--r-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--muted);
+      transition: var(--transition);
+    }
+
+    .icon-btn:hover {
+      background: var(--surface2);
+      color: var(--text);
+    }
+
+    /* Empty State */
+    .empty-state {
+      text-align: center;
+      padding: 80px 24px;
+    }
+
+    .empty-icon {
+      font-size: 52px;
+      margin-bottom: 18px;
+    }
+
+    .empty-title {
+      font-family: var(--font-head);
+      font-size: 22px;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    .empty-sub {
+      color: var(--muted);
+      font-size: 14px;
+      margin-bottom: 24px;
+    }
+
+    /* Modal */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      padding: 20px;
+    }
+
+    .modal {
+      background: var(--surface);
+      border-radius: 16px;
+      width: 100%;
+      max-width: 500px;
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+
+    .modal-sm {
+      max-width: 400px;
+    }
+
+    .modal-header {
+      padding: 24px 24px 20px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .modal-title {
+      font-family: var(--font-head);
+      font-size: 22px;
+      font-weight: 700;
+    }
+
+    .modal-close {
+      width: 32px;
+      height: 32px;
+      border: none;
+      background: transparent;
+      cursor: pointer;
+      border-radius: var(--r-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--muted);
+    }
+
+    .modal-close:hover {
+      background: var(--surface2);
+    }
+
+    .modal .field {
+      padding: 0 24px;
+      margin-top: 20px;
+    }
+
+    .modal-body-text {
+      padding: 20px 24px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .modal-footer {
+      padding: 20px 24px 24px;
+      display: flex;
+      gap: 12px;
+      justify-content: flex-end;
+    }
+
+    .modal-footer .btn {
+      width: auto;
+      min-width: 100px;
+    }
+
+    /* Toast */
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--text);
+      color: white;
+      padding: 14px 24px;
+      border-radius: var(--r-md);
+      font-size: 14px;
+      z-index: 2000;
+      animation: slideUp 0.3s ease;
+    }
+
+    @keyframes slideUp {
+      from {
+        opacity: 0;
+        transform: translate(-50%, 20px);
+      }
+      to {
+        opacity: 1;
+        transform: translate(-50%, 0);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .topbar { padding: 0 16px; }
+      .main { padding: 24px 16px 60px; }
+      .page-title { font-size: 24px; }
+      .stats { grid-template-columns: repeat(2, 1fr); }
+      .items-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- AUTH SCREEN -->
+  <div id="auth-screen" class="auth-shell">
+    <div class="auth-card">
+      <div class="auth-logo">Moveup<span>.</span></div>
+      <div class="auth-tagline">Your personal data manager</div>
+      <div id="auth-error" class="error-msg hidden"></div>
+
+      <!-- Login Form -->
+      <div id="login-form">
+        <div class="auth-title">Welcome back</div>
+        <div class="field">
+          <label for="login-email">Email</label>
+          <input type="email" id="login-email" placeholder="you@example.com"/>
+        </div>
+        <div class="field">
+          <label for="login-password">Password</label>
+          <input type="password" id="login-password" placeholder="••••••••"/>
+        </div>
+        <button class="btn btn-primary" id="login-btn">Sign In</button>
+        <div class="auth-switch">
+          Don't have an account?
+          <button id="go-register">Register</button>
+        </div>
+      </div>
+
+      <!-- Register Form -->
+      <div id="register-form" class="hidden">
+        <div class="auth-title">Create your account</div>
+        <div class="field">
+          <label for="reg-name">Full Name</label>
+          <input type="text" id="reg-name" placeholder="Jane Smith"/>
+        </div>
+        <div class="field">
+          <label for="reg-email">Email</label>
+          <input type="email" id="reg-email" placeholder="you@example.com"/>
+        </div>
+        <div class="field">
+          <label for="reg-password">Password</label>
+          <input type="password" id="reg-password" placeholder="Min. 6 characters"/>
+        </div>
+        <button class="btn btn-primary" id="register-btn">Create Account</button>
+        <div class="auth-switch">
+          Already have an account?
+          <button id="go-login">Sign In</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- APP SCREEN -->
+  <div id="app-screen" class="hidden">
+    <header class="topbar">
+      <div class="topbar-logo">Moveup<span>.</span></div>
+      <div class="topbar-right">
+        <div class="user-chip">
+          <div class="avatar" id="user-avatar"></div>
+          <span id="user-name-label"></span>
+        </div>
+        <button class="btn btn-ghost btn-sm" id="logout-btn">Sign Out</button>
+      </div>
+    </header>
+
+    <main class="main">
+      <div class="page-header">
+        <div>
+          <h1 class="page-title">Records</h1>
+          <p class="page-sub">Manage your personal data records</p>
+        </div>
+        <button class="btn btn-primary" id="new-record-btn">+ New Record</button>
+      </div>
+
+      <div class="stats" id="stats-bar">
+        <div class="stat-card">
+          <div class="stat-num" id="stat-total" style="color:#6366f1">0</div>
+          <div class="stat-label">Total</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num" id="stat-work" style="color:#4f8ef7">0</div>
+          <div class="stat-label">Work</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num" id="stat-personal" style="color:#a78bfa">0</div>
+          <div class="stat-label">Personal</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num" id="stat-idea" style="color:#34d399">0</div>
+          <div class="stat-label">Idea</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num" id="stat-urgent" style="color:#f87171">0</div>
+          <div class="stat-label">Urgent</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num" id="stat-archive" style="color:#94a3b8">0</div>
+          <div class="stat-label">Archive</div>
+        </div>
+      </div>
+
+      <div class="toolbar">
+        <div class="search-wrap">
+          <span class="search-icon">🔍</span>
+          <input type="search" id="search-input" placeholder="Search records…"/>
+        </div>
+        <div class="filter-group" id="filter-group">
+          <button class="filter-btn active" data-cat="All">All</button>
+          <button class="filter-btn" data-cat="Work">Work</button>
+          <button class="filter-btn" data-cat="Personal">Personal</button>
+          <button class="filter-btn" data-cat="Idea">Idea</button>
+          <button class="filter-btn" data-cat="Urgent">Urgent</button>
+          <button class="filter-btn" data-cat="Archive">Archive</button>
+        </div>
+      </div>
+
+      <div class="items-grid" id="items-grid"></div>
+
+      <div class="empty-state hidden" id="empty-state">
+        <div class="empty-icon">📭</div>
+        <div class="empty-title">No records yet</div>
+        <div class="empty-sub">Create your first record to get started.</div>
+        <button class="btn btn-primary" id="empty-create-btn">Create Record</button>
+      </div>
+    </main>
+  </div>
+
+  <!-- CREATE/EDIT MODAL -->
+  <div id="item-modal" class="modal-overlay hidden">
+    <div class="modal">
+      <div class="modal-header">
+        <h2 class="modal-title" id="modal-title">New Record</h2>
+        <button class="modal-close" id="modal-close-x">✕</button>
+      </div>
+      <div class="field">
+        <label for="modal-item-title">Title <span class="required">*</span></label>
+        <input type="text" id="modal-item-title" placeholder="Enter a title…"/>
+      </div>
+      <div class="field">
+        <label for="modal-item-category">Category</label>
+        <select id="modal-item-category" class="select-field">
+          <option value="Work">Work</option>
+          <option value="Personal">Personal</option>
+          <option value="Idea">Idea</option>
+          <option value="Urgent">Urgent</option>
+          <option value="Archive">Archive</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="modal-item-desc">Description</label>
+        <textarea id="modal-item-desc" class="textarea-field" placeholder="Describe this record…"></textarea>
+        <div class="char-count"><span id="desc-count">0</span>/500</div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-ghost" id="modal-cancel">Cancel</button>
+        <button class="btn btn-primary" id="modal-save">Save</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- DELETE MODAL -->
+  <div id="delete-modal" class="modal-overlay hidden">
+    <div class="modal modal-sm">
+      <div class="modal-header">
+        <h2 class="modal-title">Delete Record?</h2>
+      </div>
+      <p class="modal-body-text">
+        This action cannot be undone. The record will be permanently removed.
+      </p>
+      <div class="modal-footer">
+        <button class="btn btn-ghost" id="delete-cancel">Cancel</button>
+        <button class="btn btn-danger" id="delete-confirm">Delete</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="toast" class="toast hidden"></div>
+
+  <script>
+    // LocalStorage Database
+    const DB = {
+      getUsers: () => JSON.parse(localStorage.getItem('moveup_users') || '[]'),
+      saveUsers: (users) => localStorage.setItem('moveup_users', JSON.stringify(users)),
+      getRecords: () => JSON.parse(localStorage.getItem('moveup_records') || '[]'),
+      saveRecords: (records) => localStorage.setItem('moveup_records', JSON.stringify(records)),
+      getCurrentUser: () => JSON.parse(localStorage.getItem('moveup_current_user') || 'null'),
+      setCurrentUser: (user) => localStorage.setItem('moveup_current_user', JSON.stringify(user)),
+      clearCurrentUser: () => localStorage.removeItem('moveup_current_user')
+    };
+
+    // State
+    let currentUser = null;
+    let records = [];
+    let editingId = null;
+    let deleteId = null;
+    let currentFilter = 'All';
+
+    // DOM Elements
+    const authScreen = document.getElementById('auth-screen');
+    const appScreen = document.getElementById('app-screen');
+    const loginForm = document.getElementById('login-form');
+    const registerForm = document.getElementById('register-form');
+    const authError = document.getElementById('auth-error');
+    const itemsGrid = document.getElementById('items-grid');
+    const emptyState = document.getElementById('empty-state');
+    const itemModal = document.getElementById('item-modal');
+    const deleteModal = document.getElementById('delete-modal');
+    const toast = document.getElementById('toast');
+
+    // Auth Functions
+    document.getElementById('go-register').onclick = () => {
+      loginForm.classList.add('hidden');
+      registerForm.classList.remove('hidden');
+      authError.classList.add('hidden');
+    };
+
+    document.getElementById('go-login').onclick = () => {
+      registerForm.classList.add('hidden');
+      loginForm.classList.remove('hidden');
+      authError.classList.add('hidden');
+    };
+
+    document.getElementById('register-btn').onclick = () => {
+      const name = document.getElementById('reg-name').value.trim();
+      const email = document.getElementById('reg-email').value.trim();
+      const password = document.getElementById('reg-password').value;
+
+      if (!name || !email || !password) {
+        showError('All fields are required');
+        return;
+      }
+      if (password.length < 6) {
+        showError('Password must be at least 6 characters');
+        return;
+      }
+
+      const users = DB.getUsers();
+      if (users.find(u => u.email === email)) {
+        showError('Email already registered');
+        return;
+      }
+
+      users.push({ id: Date.now(), name, email, password });
+      DB.saveUsers(users);
+      showToast('Account created! Please sign in.');
+      document.getElementById('go-login').click();
+    };
+
+    document.getElementById('login-btn').onclick = () => {
+      const email = document.getElementById('login-email').value.trim();
+      const password = document.getElementById('login-password').value;
+
+      if (!email || !password) {
+        showError('Email and password required');
+        return;
+      }
+
+      const users = DB.getUsers();
+      const user = users.find(u => u.email === email && u.password === password);
+
+      if (!user) {
+        showError('Invalid email or password');
+        return;
+      }
+
+      currentUser = user;
+      DB.setCurrentUser(user);
+      showApp();
+    };
+
+    document.getElementById('logout-btn').onclick = () => {
+      currentUser = null;
+      DB.clearCurrentUser();
+      authScreen.classList.remove('hidden');
+      appScreen.classList.add('hidden');
+    };
+
+    function showError(msg) {
+      authError.textContent = msg;
+      authError.classList.remove('hidden');
+    }
+
+    function showToast(msg) {
+      toast.textContent = msg;
+      toast.classList.remove('hidden');
+      setTimeout(() => toast.classList.add('hidden'), 3000);
+    }
+
+    function showApp() {
+      authScreen.classList.add('hidden');
+      appScreen.classList.remove('hidden');
+      document.getElementById('user-name-label').textContent = currentUser.name;
+      document.getElementById('user-avatar').textContent = currentUser.name.charAt(0).toUpperCase();
+      loadRecords();
+    }
+
+    // Records Functions
+    function loadRecords() {
+      const allRecords = DB.getRecords();
+      records = allRecords.filter(r => r.userId === currentUser.id);
+      renderRecords();
+      updateStats();
+    }
+
+    function renderRecords() {
+      const filtered = currentFilter === 'All' 
+        ? records 
+        : records.filter(r => r.category === currentFilter);
+
+      const searchTerm = document.getElementById('search-input').value.toLowerCase();
+      const searched = searchTerm 
+        ? filtered.filter(r => r.title.toLowerCase().includes(searchTerm) || r.desc.toLowerCase().includes(searchTerm))
+        : filtered;
+
+      if (searched.length === 0) {
+        itemsGrid.innerHTML = '';
+        emptyState.classList.remove('hidden');
+        document.getElementById('empty-title').textContent = searchTerm ? 'No results found' : 'No records yet';
+        document.getElementById('empty-sub').textContent = searchTerm ? 'Try a different search term.' : 'Create your first record to get started.';
+      } else {
+        emptyState.classList.add('hidden');
+        itemsGrid.innerHTML = searched.map(r => `
+          <div class="item-card">
+            <span class="item-category cat-${r.category.toLowerCase()}">${r.category}</span>
+            <div class="item-title">${r.title}</div>
+            <div class="item-desc">${r.desc || 'No description'}</div>
+            <div class="item-footer">
+              <span class="item-date">${new Date(r.createdAt).toLocaleDateString()}</span>
+              <div class="item-actions">
+                <button class="icon-btn" onclick="editRecord(${r.id})">✏️</button>
+                <button class="icon-btn" onclick="confirmDelete(${r.id})">🗑️</button>
+              </div>
+            </div>
+          </div>
+        `).join('');
+      }
+    }
+
+    function updateStats() {
+      document.getElementById('stat-total').textContent = records.length;
+      document.getElementById('stat-work').textContent = records.filter(r => r.category === 'Work').length;
+      document.getElementById('stat-personal').textContent = records.filter(r => r.category === 'Personal').length;
+      document.getElementById('stat-idea').textContent = records.filter(r => r.category === 'Idea').length;
+      document.getElementById('stat-urgent').textContent = records.filter(r => r.category === 'Urgent').length;
+      document.getElementById('stat-archive').textContent = records.filter(r => r.category === 'Archive').length;
+    }
+
+    document.getElementById('new-record-btn').onclick = () => openModal();
+    document.getElementById('empty-create-btn').onclick = () => openModal();
+
+    function openModal(record = null) {
+      editingId = record ? record.id : null;
+      document.getElementById('modal-title').textContent = record ? 'Edit Record' : 'New Record';
+      document.getElementById('modal-item-title').value = record ? record.title : '';
+      document.getElementById('modal-item-category').value = record ? record.category : 'Work';
+      document.getElementById('modal-item-desc').value = record ? record.desc : '';
+      document.getElementById('desc-count').textContent = (record ? record.desc : '').length;
+      itemModal.classList.remove('hidden');
+    }
+
+    function editRecord(id) {
+      const record = records.find(r => r.id === id);
+      if (record) openModal(record);
+    }
+
+    document.getElementById('modal-item-desc').oninput = (e) => {
+      document.getElementById('desc-count').textContent = e.target.value.length;
+    };
+
+    document.getElementById('modal-save').onclick = () => {
+      const title = document.getElementById('modal-item-title').value.trim();
+      const category = document.getElementById('modal-item-category').value;
+      const desc = document.getElementById('modal-item-desc').value.trim();
+
+      if (!title) {
+        alert('Title is required');
+        return;
+      }
+
+      const allRecords = DB.getRecords();
+
+      if (editingId) {
+        const idx = allRecords.findIndex(r => r.id === editingId);
+        allRecords[idx] = { ...allRecords[idx], title, category, desc };
+        showToast('Record updated');
+      } else {
+        allRecords.push({
+          id: Date.now(),
+          userId: currentUser.id,
+          title,
+          category,
+          desc,
+          createdAt: Date.now()
+        });
+        showToast('Record created');
+      }
+
+      DB.saveRecords(allRecords);
+      itemModal.classList.add('hidden');
+      loadRecords();
+    };
+
+    document.getElementById('modal-cancel').onclick = () => itemModal.classList.add('hidden');
+    document.getElementById('modal-close-x').onclick = () => itemModal.classList.add('hidden');
+
+    function confirmDelete(id) {
+      deleteId = id;
+      deleteModal.classList.remove('hidden');
+    }
+
+    document.getElementById('delete-confirm').onclick = () => {
+      const allRecords = DB.getRecords();
+      const filtered = allRecords.filter(r => r.id !== deleteId);
+      DB.saveRecords(filtered);
+      deleteModal.classList.add('hidden');
+      showToast('Record deleted');
+      loadRecords();
+    };
+
+    document.getElementById('delete-cancel').onclick = () => deleteModal.classList.add('hidden');
+
+    // Filters
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.onclick = () => {
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        currentFilter = btn.getAttribute('data-cat');
+        renderRecords();
+      };
+    });
+
+    document.getElementById('search-input').oninput = () => renderRecords();
+
+    // Init
+    const storedUser = DB.getCurrentUser();
+    if (storedUser) {
+      currentUser = storedUser;
+      showApp();
+    }
+  </script>
+</body>
+</html>
