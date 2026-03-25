@@ -1,4 +1,4 @@
-# Nexus — Full-Stack CRUD App
+# Moveup — Full-Stack CRUD App
 
 A responsive, full-featured personal data manager built with vanilla HTML, CSS, and JavaScript. No frameworks, no dependencies, no build step — just open `index.html` in a browser.
 
@@ -50,7 +50,7 @@ npx serve frontend
 ## 📁 Project Structure
 
 ```
-nexus-crud/
+moveup-crud/
 ├── frontend/
 │   ├── index.html          ← App entry point
 │   ├── css/
