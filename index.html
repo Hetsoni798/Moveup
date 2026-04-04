@@ -92,9 +92,7 @@
       margin-bottom: 24px;
     }
 
-    .field {
-      margin-bottom: 18px;
-    }
+    .field { margin-bottom: 18px; }
 
     .field label {
       display: block;
@@ -161,31 +159,30 @@
       justify-content: center;
     }
 
+    .btn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
     .btn-primary {
       background: var(--accent);
       color: white;
       width: 100%;
     }
-    .btn-primary:hover {
-      background: #5558e3;
-    }
+    .btn-primary:hover:not(:disabled) { background: #5558e3; }
 
     .btn-ghost {
       background: transparent;
       color: var(--text);
       border: 1px solid var(--border);
     }
-    .btn-ghost:hover {
-      background: var(--surface2);
-    }
+    .btn-ghost:hover { background: var(--surface2); }
 
     .btn-danger {
       background: var(--danger);
       color: white;
     }
-    .btn-danger:hover {
-      background: #dc2626;
-    }
+    .btn-danger:hover { background: #dc2626; }
 
     .btn-sm {
       padding: 8px 14px;
@@ -216,6 +213,35 @@
       border-radius: var(--r-md);
       font-size: 13px;
       margin-bottom: 16px;
+    }
+
+    /* Loading overlay */
+    .loading-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(255,255,255,0.85);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .spinner {
+      width: 40px;
+      height: 40px;
+      border: 3px solid var(--border);
+      border-top-color: var(--accent);
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+    }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .loading-text {
+      font-size: 14px;
+      color: var(--muted);
     }
 
     /* Topbar */
@@ -377,16 +403,8 @@
       transition: var(--transition);
     }
 
-    .filter-btn:hover {
-      background: var(--surface2);
-      color: var(--text);
-    }
-
-    .filter-btn.active {
-      background: var(--surface2);
-      color: var(--text);
-      border-color: var(--accent);
-    }
+    .filter-btn:hover { background: var(--surface2); color: var(--text); }
+    .filter-btn.active { background: var(--surface2); color: var(--text); border-color: var(--accent); }
 
     /* Items Grid */
     .items-grid {
@@ -420,11 +438,11 @@
       text-transform: uppercase;
     }
 
-    .cat-work { background: #dbeafe; color: #1e40af; }
+    .cat-work     { background: #dbeafe; color: #1e40af; }
     .cat-personal { background: #ede9fe; color: #6d28d9; }
-    .cat-idea { background: #d1fae5; color: #065f46; }
-    .cat-urgent { background: #fee2e2; color: #991b1b; }
-    .cat-archive { background: #f1f5f9; color: #475569; }
+    .cat-idea     { background: #d1fae5; color: #065f46; }
+    .cat-urgent   { background: #fee2e2; color: #991b1b; }
+    .cat-archive  { background: #f1f5f9; color: #475569; }
 
     .item-title {
       font-family: var(--font-head);
@@ -448,15 +466,9 @@
       border-top: 1px solid var(--border);
     }
 
-    .item-date {
-      font-size: 12px;
-      color: var(--muted);
-    }
+    .item-date { font-size: 12px; color: var(--muted); }
 
-    .item-actions {
-      display: flex;
-      gap: 8px;
-    }
+    .item-actions { display: flex; gap: 8px; }
 
     .icon-btn {
       width: 32px;
@@ -472,10 +484,7 @@
       transition: var(--transition);
     }
 
-    .icon-btn:hover {
-      background: var(--surface2);
-      color: var(--text);
-    }
+    .icon-btn:hover { background: var(--surface2); color: var(--text); }
 
     /* Empty State */
     .empty-state {
@@ -483,10 +492,7 @@
       padding: 80px 24px;
     }
 
-    .empty-icon {
-      font-size: 52px;
-      margin-bottom: 18px;
-    }
+    .empty-icon { font-size: 52px; margin-bottom: 18px; }
 
     .empty-title {
       font-family: var(--font-head);
@@ -495,11 +501,7 @@
       margin-bottom: 10px;
     }
 
-    .empty-sub {
-      color: var(--muted);
-      font-size: 14px;
-      margin-bottom: 24px;
-    }
+    .empty-sub { color: var(--muted); font-size: 14px; margin-bottom: 24px; }
 
     /* Modal */
     .modal-overlay {
@@ -522,9 +524,7 @@
       overflow-y: auto;
     }
 
-    .modal-sm {
-      max-width: 400px;
-    }
+    .modal-sm { max-width: 400px; }
 
     .modal-header {
       padding: 24px 24px 20px;
@@ -553,14 +553,9 @@
       color: var(--muted);
     }
 
-    .modal-close:hover {
-      background: var(--surface2);
-    }
+    .modal-close:hover { background: var(--surface2); }
 
-    .modal .field {
-      padding: 0 24px;
-      margin-top: 20px;
-    }
+    .modal .field { padding: 0 24px; margin-top: 20px; }
 
     .modal-body-text {
       padding: 20px 24px;
@@ -575,10 +570,7 @@
       justify-content: flex-end;
     }
 
-    .modal-footer .btn {
-      width: auto;
-      min-width: 100px;
-    }
+    .modal-footer .btn { width: auto; min-width: 100px; }
 
     /* Toast */
     .toast {
@@ -596,14 +588,8 @@
     }
 
     @keyframes slideUp {
-      from {
-        opacity: 0;
-        transform: translate(-50%, 20px);
-      }
-      to {
-        opacity: 1;
-        transform: translate(-50%, 0);
-      }
+      from { opacity: 0; transform: translate(-50%, 20px); }
+      to   { opacity: 1; transform: translate(-50%, 0); }
     }
 
     @media (max-width: 768px) {
@@ -617,8 +603,14 @@
 </head>
 <body>
 
+  <!-- LOADING OVERLAY -->
+  <div id="loading-overlay" class="loading-overlay">
+    <div class="spinner"></div>
+    <div class="loading-text">Connecting…</div>
+  </div>
+
   <!-- AUTH SCREEN -->
-  <div id="auth-screen" class="auth-shell">
+  <div id="auth-screen" class="auth-shell hidden">
     <div class="auth-card">
       <div class="auth-logo">Moveup<span>.</span></div>
       <div class="auth-tagline">Your personal data manager</div>
@@ -690,11 +682,11 @@
 
       <div class="stats" id="stats-bar">
         <div class="stat-card">
-          <div class="stat-num" id="stat-total" style="color:#6366f1">0</div>
+          <div class="stat-num" id="stat-total"  style="color:#6366f1">0</div>
           <div class="stat-label">Total</div>
         </div>
         <div class="stat-card">
-          <div class="stat-num" id="stat-work" style="color:#4f8ef7">0</div>
+          <div class="stat-num" id="stat-work"     style="color:#4f8ef7">0</div>
           <div class="stat-label">Work</div>
         </div>
         <div class="stat-card">
@@ -702,15 +694,15 @@
           <div class="stat-label">Personal</div>
         </div>
         <div class="stat-card">
-          <div class="stat-num" id="stat-idea" style="color:#34d399">0</div>
+          <div class="stat-num" id="stat-idea"     style="color:#34d399">0</div>
           <div class="stat-label">Idea</div>
         </div>
         <div class="stat-card">
-          <div class="stat-num" id="stat-urgent" style="color:#f87171">0</div>
+          <div class="stat-num" id="stat-urgent"   style="color:#f87171">0</div>
           <div class="stat-label">Urgent</div>
         </div>
         <div class="stat-card">
-          <div class="stat-num" id="stat-archive" style="color:#94a3b8">0</div>
+          <div class="stat-num" id="stat-archive"  style="color:#94a3b8">0</div>
           <div class="stat-label">Archive</div>
         </div>
       </div>
@@ -734,8 +726,8 @@
 
       <div class="empty-state hidden" id="empty-state">
         <div class="empty-icon">📭</div>
-        <div class="empty-title">No records yet</div>
-        <div class="empty-sub">Create your first record to get started.</div>
+        <div class="empty-title" id="empty-title">No records yet</div>
+        <div class="empty-sub" id="empty-sub">Create your first record to get started.</div>
         <button class="btn btn-primary" id="empty-create-btn">Create Record</button>
       </div>
     </main>
@@ -792,108 +784,71 @@
 
   <div id="toast" class="toast hidden"></div>
 
+  <!-- ============================================================
+       FIREBASE SDK  (v9 compat build — works without bundler)
+       ============================================================ -->
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+
   <script>
-    // LocalStorage Database
-    const DB = {
-      getUsers: () => JSON.parse(localStorage.getItem('moveup_users') || '[]'),
-      saveUsers: (users) => localStorage.setItem('moveup_users', JSON.stringify(users)),
-      getRecords: () => JSON.parse(localStorage.getItem('moveup_records') || '[]'),
-      saveRecords: (records) => localStorage.setItem('moveup_records', JSON.stringify(records)),
-      getCurrentUser: () => JSON.parse(localStorage.getItem('moveup_current_user') || 'null'),
-      setCurrentUser: (user) => localStorage.setItem('moveup_current_user', JSON.stringify(user)),
-      clearCurrentUser: () => localStorage.removeItem('moveup_current_user')
+    // ============================================================
+    //  STEP 1 — PASTE YOUR FIREBASE CONFIG HERE
+    //    Replace every value below with the ones from Firebase Console
+    //    Project Settings → Your apps → Web app → firebaseConfig
+    // ============================================================
+    const firebaseConfig = {
+     apiKey: "AIzaSyCkhBi3kelK0CnsW8xjQar09T58GlItgag",
+     authDomain: "moveup-8f7cb.firebaseapp.com",
+     projectId: "moveup-8f7cb",
+     storageBucket: "moveup-8f7cb.firebasestorage.app",
+     messagingSenderId: "262438940331",
+     appId: "1:262438940331:web:c3e1345cceee155b7091ee",
+     measurementId: "G-CXXQ51KR13"
     };
 
+    // ============================================================
+    // Firebase Init
+    // ============================================================
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+    const db   = firebase.firestore();
+
+    // ============================================================
     // State
-    let currentUser = null;
-    let records = [];
-    let editingId = null;
-    let deleteId = null;
+    // ============================================================
+    let currentUser   = null;
+    let records       = [];
+    let editingId     = null;
+    let deleteId      = null;
     let currentFilter = 'All';
+    let unsubscribeRecords = null; // real-time listener cleanup
 
-    // DOM Elements
-    const authScreen = document.getElementById('auth-screen');
-    const appScreen = document.getElementById('app-screen');
-    const loginForm = document.getElementById('login-form');
-    const registerForm = document.getElementById('register-form');
-    const authError = document.getElementById('auth-error');
-    const itemsGrid = document.getElementById('items-grid');
-    const emptyState = document.getElementById('empty-state');
-    const itemModal = document.getElementById('item-modal');
-    const deleteModal = document.getElementById('delete-modal');
-    const toast = document.getElementById('toast');
+    // ============================================================
+    // DOM Refs
+    // ============================================================
+    const loadingOverlay = document.getElementById('loading-overlay');
+    const authScreen     = document.getElementById('auth-screen');
+    const appScreen      = document.getElementById('app-screen');
+    const loginForm      = document.getElementById('login-form');
+    const registerForm   = document.getElementById('register-form');
+    const authError      = document.getElementById('auth-error');
+    const itemsGrid      = document.getElementById('items-grid');
+    const emptyState     = document.getElementById('empty-state');
+    const itemModal      = document.getElementById('item-modal');
+    const deleteModal    = document.getElementById('delete-modal');
+    const toast          = document.getElementById('toast');
 
-    // Auth Functions
-    document.getElementById('go-register').onclick = () => {
-      loginForm.classList.add('hidden');
-      registerForm.classList.remove('hidden');
-      authError.classList.add('hidden');
-    };
-
-    document.getElementById('go-login').onclick = () => {
-      registerForm.classList.add('hidden');
-      loginForm.classList.remove('hidden');
-      authError.classList.add('hidden');
-    };
-
-    document.getElementById('register-btn').onclick = () => {
-      const name = document.getElementById('reg-name').value.trim();
-      const email = document.getElementById('reg-email').value.trim();
-      const password = document.getElementById('reg-password').value;
-
-      if (!name || !email || !password) {
-        showError('All fields are required');
-        return;
-      }
-      if (password.length < 6) {
-        showError('Password must be at least 6 characters');
-        return;
-      }
-
-      const users = DB.getUsers();
-      if (users.find(u => u.email === email)) {
-        showError('Email already registered');
-        return;
-      }
-
-      users.push({ id: Date.now(), name, email, password });
-      DB.saveUsers(users);
-      showToast('Account created! Please sign in.');
-      document.getElementById('go-login').click();
-    };
-
-    document.getElementById('login-btn').onclick = () => {
-      const email = document.getElementById('login-email').value.trim();
-      const password = document.getElementById('login-password').value;
-
-      if (!email || !password) {
-        showError('Email and password required');
-        return;
-      }
-
-      const users = DB.getUsers();
-      const user = users.find(u => u.email === email && u.password === password);
-
-      if (!user) {
-        showError('Invalid email or password');
-        return;
-      }
-
-      currentUser = user;
-      DB.setCurrentUser(user);
-      showApp();
-    };
-
-    document.getElementById('logout-btn').onclick = () => {
-      currentUser = null;
-      DB.clearCurrentUser();
-      authScreen.classList.remove('hidden');
-      appScreen.classList.add('hidden');
-    };
-
+    // ============================================================
+    // Helpers
+    // ============================================================
     function showError(msg) {
       authError.textContent = msg;
       authError.classList.remove('hidden');
+    }
+
+    function hideError() {
+      authError.classList.add('hidden');
     }
 
     function showToast(msg) {
@@ -902,75 +857,245 @@
       setTimeout(() => toast.classList.add('hidden'), 3000);
     }
 
-    function showApp() {
-      authScreen.classList.add('hidden');
-      appScreen.classList.remove('hidden');
-      document.getElementById('user-name-label').textContent = currentUser.name;
-      document.getElementById('user-avatar').textContent = currentUser.name.charAt(0).toUpperCase();
-      loadRecords();
+    function setLoading(show) {
+      loadingOverlay.classList.toggle('hidden', !show);
     }
 
-    // Records Functions
-    function loadRecords() {
-      const allRecords = DB.getRecords();
-      records = allRecords.filter(r => r.userId === currentUser.id);
-      renderRecords();
-      updateStats();
+    function setBtnLoading(btn, loading, label) {
+      btn.disabled = loading;
+      btn.textContent = loading ? 'Please wait…' : label;
     }
 
+    // ============================================================
+    // AUTH — Firebase Auth replaces localStorage users
+    // ============================================================
+
+    // Toggle login ↔ register
+    document.getElementById('go-register').onclick = () => {
+      loginForm.classList.add('hidden');
+      registerForm.classList.remove('hidden');
+      hideError();
+    };
+
+    document.getElementById('go-login').onclick = () => {
+      registerForm.classList.add('hidden');
+      loginForm.classList.remove('hidden');
+      hideError();
+    };
+
+    // REGISTER — creates user in Firebase Auth + saves display name to Firestore
+    document.getElementById('register-btn').onclick = async () => {
+      const name     = document.getElementById('reg-name').value.trim();
+      const email    = document.getElementById('reg-email').value.trim();
+      const password = document.getElementById('reg-password').value;
+
+      if (!name || !email || !password) { showError('All fields are required'); return; }
+      if (password.length < 6)          { showError('Password must be at least 6 characters'); return; }
+
+      const btn = document.getElementById('register-btn');
+      setBtnLoading(btn, true, 'Create Account');
+      hideError();
+
+      try {
+        // 1. Create Firebase Auth user
+        const cred = await auth.createUserWithEmailAndPassword(email, password);
+
+        // 2. Update display name on Auth profile
+        await cred.user.updateProfile({ displayName: name });
+
+        // 3. Save extra user info to Firestore (users collection)
+        await db.collection('users').doc(cred.user.uid).set({
+          name,
+          email,
+          createdAt: firebase.firestore.FieldValue.serverTimestamp()
+        });
+
+        showToast('Account created! Signing you in…');
+        // onAuthStateChanged below will handle the redirect automatically
+
+      } catch (err) {
+        showError(friendlyAuthError(err.code));
+      } finally {
+        setBtnLoading(btn, false, 'Create Account');
+      }
+    };
+
+    // LOGIN — Firebase Auth signs in, onAuthStateChanged handles the rest
+    document.getElementById('login-btn').onclick = async () => {
+      const email    = document.getElementById('login-email').value.trim();
+      const password = document.getElementById('login-password').value;
+
+      if (!email || !password) { showError('Email and password required'); return; }
+
+      const btn = document.getElementById('login-btn');
+      setBtnLoading(btn, true, 'Sign In');
+      hideError();
+
+      try {
+        await auth.signInWithEmailAndPassword(email, password);
+        // onAuthStateChanged will handle the UI transition
+      } catch (err) {
+        showError(friendlyAuthError(err.code));
+      } finally {
+        setBtnLoading(btn, false, 'Sign In');
+      }
+    };
+
+    // LOGOUT
+    document.getElementById('logout-btn').onclick = async () => {
+      if (unsubscribeRecords) unsubscribeRecords(); // stop Firestore listener
+      await auth.signOut();
+    };
+
+    // Auth state watcher — the single source of truth for UI
+    auth.onAuthStateChanged(async (user) => {
+      setLoading(false);
+      if (user) {
+        currentUser = user;
+        authScreen.classList.add('hidden');
+        appScreen.classList.remove('hidden');
+
+        // Show user info (try displayName, fallback to email)
+        const displayName = user.displayName || user.email;
+        document.getElementById('user-name-label').textContent = displayName;
+        document.getElementById('user-avatar').textContent = displayName.charAt(0).toUpperCase();
+
+        // Start listening to this user's records in real-time
+        listenToRecords();
+      } else {
+        currentUser = null;
+        records = [];
+        appScreen.classList.add('hidden');
+        authScreen.classList.remove('hidden');
+      }
+    });
+
+    // Convert Firebase error codes → readable messages
+    function friendlyAuthError(code) {
+      const map = {
+        'auth/email-already-in-use':    'That email is already registered.',
+        'auth/invalid-email':           'Please enter a valid email address.',
+        'auth/weak-password':           'Password must be at least 6 characters.',
+        'auth/user-not-found':          'No account found with that email.',
+        'auth/wrong-password':          'Incorrect password. Please try again.',
+        'auth/too-many-requests':       'Too many attempts. Please wait and try again.',
+        'auth/network-request-failed':  'Network error. Check your connection.',
+      };
+      return map[code] || 'Something went wrong. Please try again.';
+    }
+
+    // ============================================================
+    // FIRESTORE — Real-time CRUD for records
+    // ============================================================
+
+    // Listen to the current user's records (real-time updates)
+    function listenToRecords() {
+      if (unsubscribeRecords) unsubscribeRecords(); // clean up old listener
+
+      unsubscribeRecords = db
+        .collection('records')
+        .where('userId', '==', currentUser.uid)
+        .orderBy('createdAt', 'desc')
+        .onSnapshot((snapshot) => {
+          records = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+          renderRecords();
+          updateStats();
+        }, (err) => {
+          console.error('Firestore error:', err);
+          showToast('Error loading records.');
+        });
+    }
+
+    // CREATE record
+    async function createRecord(title, category, desc) {
+      await db.collection('records').add({
+        userId:    currentUser.uid,
+        title,
+        category,
+        desc,
+        createdAt: firebase.firestore.FieldValue.serverTimestamp()
+      });
+    }
+
+    // UPDATE record
+    async function updateRecord(id, title, category, desc) {
+      await db.collection('records').doc(id).update({ title, category, desc });
+    }
+
+    // DELETE record
+    async function deleteRecord(id) {
+      await db.collection('records').doc(id).delete();
+    }
+
+    // ============================================================
+    // UI — Render Records
+    // ============================================================
     function renderRecords() {
-      const filtered = currentFilter === 'All' 
-        ? records 
+      const filtered = currentFilter === 'All'
+        ? records
         : records.filter(r => r.category === currentFilter);
 
       const searchTerm = document.getElementById('search-input').value.toLowerCase();
-      const searched = searchTerm 
-        ? filtered.filter(r => r.title.toLowerCase().includes(searchTerm) || r.desc.toLowerCase().includes(searchTerm))
+      const searched = searchTerm
+        ? filtered.filter(r =>
+            r.title.toLowerCase().includes(searchTerm) ||
+            (r.desc || '').toLowerCase().includes(searchTerm))
         : filtered;
 
       if (searched.length === 0) {
         itemsGrid.innerHTML = '';
         emptyState.classList.remove('hidden');
         document.getElementById('empty-title').textContent = searchTerm ? 'No results found' : 'No records yet';
-        document.getElementById('empty-sub').textContent = searchTerm ? 'Try a different search term.' : 'Create your first record to get started.';
+        document.getElementById('empty-sub').textContent   = searchTerm ? 'Try a different search term.' : 'Create your first record to get started.';
       } else {
         emptyState.classList.add('hidden');
-        itemsGrid.innerHTML = searched.map(r => `
-          <div class="item-card">
-            <span class="item-category cat-${r.category.toLowerCase()}">${r.category}</span>
-            <div class="item-title">${r.title}</div>
-            <div class="item-desc">${r.desc || 'No description'}</div>
-            <div class="item-footer">
-              <span class="item-date">${new Date(r.createdAt).toLocaleDateString()}</span>
-              <div class="item-actions">
-                <button class="icon-btn" onclick="editRecord(${r.id})">✏️</button>
-                <button class="icon-btn" onclick="confirmDelete(${r.id})">🗑️</button>
+        itemsGrid.innerHTML = searched.map(r => {
+          const date = r.createdAt?.toDate
+            ? r.createdAt.toDate().toLocaleDateString()
+            : 'Just now';
+          return `
+            <div class="item-card">
+              <span class="item-category cat-${r.category.toLowerCase()}">${r.category}</span>
+              <div class="item-title">${escHtml(r.title)}</div>
+              <div class="item-desc">${escHtml(r.desc) || 'No description'}</div>
+              <div class="item-footer">
+                <span class="item-date">${date}</span>
+                <div class="item-actions">
+                  <button class="icon-btn" onclick="editRecord('${r.id}')">✏️</button>
+                  <button class="icon-btn" onclick="confirmDelete('${r.id}')">🗑️</button>
+                </div>
               </div>
-            </div>
-          </div>
-        `).join('');
+            </div>`;
+        }).join('');
       }
     }
 
-    function updateStats() {
-      document.getElementById('stat-total').textContent = records.length;
-      document.getElementById('stat-work').textContent = records.filter(r => r.category === 'Work').length;
-      document.getElementById('stat-personal').textContent = records.filter(r => r.category === 'Personal').length;
-      document.getElementById('stat-idea').textContent = records.filter(r => r.category === 'Idea').length;
-      document.getElementById('stat-urgent').textContent = records.filter(r => r.category === 'Urgent').length;
-      document.getElementById('stat-archive').textContent = records.filter(r => r.category === 'Archive').length;
+    function escHtml(str) {
+      return (str || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
     }
 
-    document.getElementById('new-record-btn').onclick = () => openModal();
+    function updateStats() {
+      document.getElementById('stat-total').textContent    = records.length;
+      document.getElementById('stat-work').textContent     = records.filter(r => r.category === 'Work').length;
+      document.getElementById('stat-personal').textContent = records.filter(r => r.category === 'Personal').length;
+      document.getElementById('stat-idea').textContent     = records.filter(r => r.category === 'Idea').length;
+      document.getElementById('stat-urgent').textContent   = records.filter(r => r.category === 'Urgent').length;
+      document.getElementById('stat-archive').textContent  = records.filter(r => r.category === 'Archive').length;
+    }
+
+    // ============================================================
+    // Modal — Create / Edit
+    // ============================================================
+    document.getElementById('new-record-btn').onclick  = () => openModal();
     document.getElementById('empty-create-btn').onclick = () => openModal();
 
     function openModal(record = null) {
       editingId = record ? record.id : null;
-      document.getElementById('modal-title').textContent = record ? 'Edit Record' : 'New Record';
-      document.getElementById('modal-item-title').value = record ? record.title : '';
-      document.getElementById('modal-item-category').value = record ? record.category : 'Work';
-      document.getElementById('modal-item-desc').value = record ? record.desc : '';
-      document.getElementById('desc-count').textContent = (record ? record.desc : '').length;
+      document.getElementById('modal-title').textContent         = record ? 'Edit Record' : 'New Record';
+      document.getElementById('modal-item-title').value          = record ? record.title    : '';
+      document.getElementById('modal-item-category').value       = record ? record.category : 'Work';
+      document.getElementById('modal-item-desc').value           = record ? record.desc     : '';
+      document.getElementById('desc-count').textContent          = (record?.desc || '').length;
       itemModal.classList.remove('hidden');
     }
 
@@ -983,59 +1108,65 @@
       document.getElementById('desc-count').textContent = e.target.value.length;
     };
 
-    document.getElementById('modal-save').onclick = () => {
-      const title = document.getElementById('modal-item-title').value.trim();
+    document.getElementById('modal-save').onclick = async () => {
+      const title    = document.getElementById('modal-item-title').value.trim();
       const category = document.getElementById('modal-item-category').value;
-      const desc = document.getElementById('modal-item-desc').value.trim();
+      const desc     = document.getElementById('modal-item-desc').value.trim();
 
-      if (!title) {
-        alert('Title is required');
-        return;
+      if (!title) { alert('Title is required'); return; }
+
+      const saveBtn = document.getElementById('modal-save');
+      setBtnLoading(saveBtn, true, 'Save');
+
+      try {
+        if (editingId) {
+          await updateRecord(editingId, title, category, desc);
+          showToast('Record updated ✓');
+        } else {
+          await createRecord(title, category, desc);
+          showToast('Record created ✓');
+        }
+        itemModal.classList.add('hidden');
+        // Firestore real-time listener auto-refreshes the UI
+      } catch (err) {
+        console.error(err);
+        showToast('Error saving record.');
+      } finally {
+        setBtnLoading(saveBtn, false, 'Save');
       }
-
-      const allRecords = DB.getRecords();
-
-      if (editingId) {
-        const idx = allRecords.findIndex(r => r.id === editingId);
-        allRecords[idx] = { ...allRecords[idx], title, category, desc };
-        showToast('Record updated');
-      } else {
-        allRecords.push({
-          id: Date.now(),
-          userId: currentUser.id,
-          title,
-          category,
-          desc,
-          createdAt: Date.now()
-        });
-        showToast('Record created');
-      }
-
-      DB.saveRecords(allRecords);
-      itemModal.classList.add('hidden');
-      loadRecords();
     };
 
-    document.getElementById('modal-cancel').onclick = () => itemModal.classList.add('hidden');
+    document.getElementById('modal-cancel').onclick  = () => itemModal.classList.add('hidden');
     document.getElementById('modal-close-x').onclick = () => itemModal.classList.add('hidden');
 
+    // ============================================================
+    // Modal — Delete
+    // ============================================================
     function confirmDelete(id) {
       deleteId = id;
       deleteModal.classList.remove('hidden');
     }
 
-    document.getElementById('delete-confirm').onclick = () => {
-      const allRecords = DB.getRecords();
-      const filtered = allRecords.filter(r => r.id !== deleteId);
-      DB.saveRecords(filtered);
-      deleteModal.classList.add('hidden');
-      showToast('Record deleted');
-      loadRecords();
+    document.getElementById('delete-confirm').onclick = async () => {
+      const btn = document.getElementById('delete-confirm');
+      setBtnLoading(btn, true, 'Delete');
+      try {
+        await deleteRecord(deleteId);
+        deleteModal.classList.add('hidden');
+        showToast('Record deleted ✓');
+      } catch (err) {
+        console.error(err);
+        showToast('Error deleting record.');
+      } finally {
+        setBtnLoading(btn, false, 'Delete');
+      }
     };
 
     document.getElementById('delete-cancel').onclick = () => deleteModal.classList.add('hidden');
 
-    // Filters
+    // ============================================================
+    // Filters & Search
+    // ============================================================
     document.querySelectorAll('.filter-btn').forEach(btn => {
       btn.onclick = () => {
         document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
@@ -1046,13 +1177,6 @@
     });
 
     document.getElementById('search-input').oninput = () => renderRecords();
-
-    // Init
-    const storedUser = DB.getCurrentUser();
-    if (storedUser) {
-      currentUser = storedUser;
-      showApp();
-    }
   </script>
 </body>
 </html>
