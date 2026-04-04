@@ -969,21 +969,23 @@
         authScreen.classList.remove('hidden');
       }
     });
-
-    // Convert Firebase error codes → readable messages
+// Convert Firebase error codes → readable messages
+    
     function friendlyAuthError(code) {
-      const map = {
-        'auth/email-already-in-use':    'That email is already registered.',
-        'auth/invalid-email':           'Please enter a valid email address.',
-        'auth/weak-password':           'Password must be at least 6 characters.',
-        'auth/user-not-found':          'No account found with that email.',
-        'auth/wrong-password':          'Incorrect password. Please try again.',
-        'auth/too-many-requests':       'Too many attempts. Please wait and try again.',
-        'auth/network-request-failed':  'Network error. Check your connection.',
-      };
-      return map[code] || 'Something went wrong. Please try again.';
-    }
-
+  const map = {
+    'auth/email-already-in-use':    'That email is already registered.',
+    'auth/invalid-email':           'Please enter a valid email address.',
+    'auth/weak-password':           'Password must be at least 6 characters.',
+    'auth/user-not-found':          'No account found with that email.',       // keep for legacy
+    'auth/wrong-password':          'Incorrect password. Please try again.',   // keep for legacy
+    'auth/invalid-credential':      'Invalid email or password.',               // ← ADD THIS
+    'auth/user-disabled':           'This account has been disabled.',          // ← ADD THIS
+    'auth/too-many-requests':       'Too many attempts. Please wait and try again.',
+    'auth/network-request-failed':  'Network error. Check your connection.',
+  };
+  return map[code] || `Something went wrong (${code}). Please try again.`;     // show code in fallback
+}
+    
     // ============================================================
     // FIRESTORE — Real-time CRUD for records
     // ============================================================
